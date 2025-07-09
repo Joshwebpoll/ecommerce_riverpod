@@ -34,7 +34,7 @@ A modern, mobile-first eCommerce application built using **Flutter** and **Dart*
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/flutter_ecommerce_app.git
-cd flutter_ecommerce_app
+git clone https://github.com/Joshwebpoll/ecommerce_riverpod.git
+cd commerce_riverpod
 flutter pub get
 ```
