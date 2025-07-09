@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:riverpod_ecommerce/models/onboarding_model.dart';
-import 'package:riverpod_ecommerce/screens/login_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -62,6 +61,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         const SizedBox(height: 5),
                         Text(
                           onboardingContent[index].description,
+                          style: TextStyle(fontSize: 15),
                           textAlign: TextAlign.center,
                         ),
                         const Row(children: []),

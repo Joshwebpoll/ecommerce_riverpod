@@ -45,6 +45,7 @@ dependencies:
   riverpod: ^2.6.1
   carousel_slider: ^5.1.1
   flutter_native_splash: ^2.4.6
+  flutter_launcher_icons: ^0.14.4
   # flutter_secure_storage: ^9.0.0
 
 dev_dependencies:
@@ -117,3 +118,9 @@ flutter_native_splash:
     image: assets/images/splash_cart.png
     icon_background_color: "#ffffff"
     # branding: assets/branding.png
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/splash_cart.png"
+  # background_color: "#FFFFFF" # 👈 White background
+  # remove_alpha_ios: true
