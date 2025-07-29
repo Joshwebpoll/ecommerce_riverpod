@@ -52,6 +52,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           fit: BoxFit.contain,
                           height: 300,
                           width: 300,
+                          gaplessPlayback: true,
                         ),
                         const SizedBox(height: 20),
                         Text(

@@ -18,6 +18,7 @@ class UserNotifier extends StateNotifier<AsyncValue<UserModel>> {
     state = const AsyncLoading();
     try {
       final user = await ref.read(authServiceProvider).getUser();
+
       state = AsyncData(user);
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);

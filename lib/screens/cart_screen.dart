@@ -284,32 +284,34 @@ class _CartScreenState extends ConsumerState<CartScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              //'Total: \$${ref.watch(cartStateProvider.notifier).getTotal().toStringAsFixed(2)}',
-              // 'Total: \$${ref.watch(cartTotalProvider).toStringAsFixed(2)}',
-              'Total: ${NumberFormat.currency(symbol: '\$').format(ref.watch(cartTotalProvider))}',
-              style: TextStyle(fontSize: 16),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // AppToast.show(
-                //   context,
-                //   'Added to cart',
-                //   type: ToastTypes.success,
-                //   position: ToastPosition.bottom,
-                //   duration: Duration(seconds: 5),
-                // );
-              },
-              child: Text('Checkout'),
-            ),
-          ],
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                //'Total: \$${ref.watch(cartStateProvider.notifier).getTotal().toStringAsFixed(2)}',
+                // 'Total: \$${ref.watch(cartTotalProvider).toStringAsFixed(2)}',
+                'Total: ${NumberFormat.currency(symbol: '\$').format(ref.watch(cartTotalProvider))}',
+                style: TextStyle(fontSize: 16),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // AppToast.show(
+                  //   context,
+                  //   'Added to cart',
+                  //   type: ToastTypes.success,
+                  //   position: ToastPosition.bottom,
+                  //   duration: Duration(seconds: 5),
+                  // );
+                },
+                child: Text('Checkout'),
+              ),
+            ],
+          ),
         ),
       ),
     );

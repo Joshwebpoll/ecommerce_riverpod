@@ -4,7 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
-  final baseUrl = 'https://ajos.cosoiit.com/api';
+  final baseUrl = 'https://buddy-chat-backend-ii8g.onrender.com/api/v1/auth';
   final storage = FlutterSecureStorage();
 
   Future<String> login(String email, String password) async {
@@ -16,6 +16,7 @@ class AuthService {
 
     if (res.statusCode == 200) {
       final data = jsonDecode(res.body);
+      print(data);
       final token = data['token'];
       await storage.write(key: 'token', value: token);
       //print(data['message']);
@@ -95,38 +96,26 @@ class AuthService {
 
   Future<String> register(
     String email,
+    String name,
     String password,
-    String firstname,
-    String confirmPassword,
-    String username,
-    String phoneNumber,
+
+    // String confirmPassword,
+    // String username,
+    // String phoneNumber,
   ) async {
     final res = await http.post(
       Uri.parse('$baseUrl/register'),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'firstname': firstname,
-        'email': email,
-        'password': password,
-        'password_confirmation': confirmPassword,
-        'phone_number': phoneNumber,
-        'username': username,
-      }),
+      body: jsonEncode({'name': name, 'email': email, 'password': password}),
     );
-
+    final data = jsonDecode(res.body);
+    print(data);
     if (res.statusCode == 200 || res.statusCode == 201) {
-      final data = jsonDecode(res.body);
-      print(data['message']);
       return data['message'];
       // print(data['message']);
       //await _storage.write(key: 'token', value: data['token']);
     } else if (res.statusCode == 422) {
       final data = json.decode(res.body);
-      // print(data);
-      // final errors = (data as Map<String, dynamic>).map(
-      //   (key, value) => MapEntry(key, List<String>.from(value)),
-      // );
-      // print(errors);
 
       // // throw ValidationException(errors);
       throw ('Something went wrong');
@@ -173,5 +162,10 @@ class AuthService {
 
   Future<void> deleteToken() async {
     await storage.delete(key: 'token');
+  }
+
+  Future<bool> deleteTokens() async {
+    await storage.delete(key: 'token');
+    return true;
   }
 }

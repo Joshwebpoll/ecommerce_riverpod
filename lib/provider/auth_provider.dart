@@ -96,11 +96,12 @@ class AuthNotifier extends StateNotifier<AsyncValue<String>> {
 
   Future<void> register(
     String email,
+
+    // String confirmPassword,
+    // String username,
+    String name,
     String password,
-    String confirmPassword,
-    String username,
-    String firstname,
-    String phoneNumber,
+    // String phoneNumber,
   ) async {
     state = const AsyncValue.loading();
     try {
@@ -108,15 +109,25 @@ class AuthNotifier extends StateNotifier<AsyncValue<String>> {
           .read(authServiceProvider)
           .register(
             email,
+            name,
             password,
-            firstname,
-            confirmPassword,
-            username,
-            phoneNumber,
+            // confirmPassword,
+            // username,
+            // phoneNumber,
           );
       state = AsyncValue.data(message);
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
+    }
+  }
+
+  Future<bool> logOut() async {
+    try {
+      await ref.read(authServiceProvider).deleteTokens();
+      return true;
+    } catch (e) {
+      state = AsyncValue.error(e, StackTrace.current);
+      return false;
     }
   }
 

@@ -27,9 +27,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
     nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
-    confirmpasswordController.dispose();
-    usernameController.dispose();
-    phoneController.dispose();
+    // confirmpasswordController.dispose();
+    // usernameController.dispose();
+    // phoneController.dispose();
     super.dispose();
   }
 
@@ -54,8 +54,8 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
                 Navigator.pushReplacementNamed(
                   context,
-                  '/verify',
-                  arguments: {'email': emailController.text},
+                  '/',
+                  //arguments: {'email': emailController.text},
                 );
               });
             }
@@ -103,32 +103,31 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 },
               ),
               SizedBox(height: 15),
-              TextFormField(
-                style: TextStyle(fontSize: 15),
-                controller: usernameController,
-                decoration: const InputDecoration(labelText: 'Username'),
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Username is required';
-                  }
 
-                  return null;
-                },
-              ),
-              SizedBox(height: 15),
-              TextFormField(
-                style: TextStyle(fontSize: 15),
-                controller: phoneController,
-                decoration: const InputDecoration(labelText: 'Phone Number'),
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Phone Number is required';
-                  }
+              // TextFormField(
+              //   style: TextStyle(fontSize: 15),
+              //   controller: usernameController,
+              //   decoration: const InputDecoration(labelText: 'Username'),
+              //   validator: (value) {
+              //     if (value == null || value.trim().isEmpty) {
+              //       return 'Username is required';
+              //     }
 
-                  return null;
-                },
-              ),
-              const SizedBox(height: 15),
+              //     return null;
+              //   },
+              // ),
+              // TextFormField(
+              //   style: TextStyle(fontSize: 15),
+              //   controller: phoneController,
+              //   decoration: const InputDecoration(labelText: 'Phone Number'),
+              //   validator: (value) {
+              //     if (value == null || value.trim().isEmpty) {
+              //       return 'Phone Number is required';
+              //     }
+
+              //     return null;
+              //   },
+              // ),
               TextFormField(
                 style: TextStyle(fontSize: 15),
                 controller: passwordController,
@@ -158,35 +157,35 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                 },
               ),
               SizedBox(height: 15),
-              TextFormField(
-                style: TextStyle(fontSize: 15),
-                controller: confirmpasswordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Confirm Password',
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      size: 20,
-                      _obscureConfirm ? Icons.visibility_off : Icons.visibility,
-                    ),
-                    onPressed: () {
-                      setState(() => _obscureConfirm = !_obscureConfirm);
-                    },
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Confirm Password is required';
-                  }
-                  if (value != passwordController.text) {
-                    return 'Passwords do not match';
-                  }
-                  if (value.length < 6) {
-                    return 'Confirm Password must be at least 6 characters';
-                  }
-                  return null;
-                },
-              ),
+              // TextFormField(
+              //   style: TextStyle(fontSize: 15),
+              //   controller: confirmpasswordController,
+              //   obscureText: true,
+              //   decoration: InputDecoration(
+              //     labelText: 'Confirm Password',
+              //     suffixIcon: IconButton(
+              //       icon: Icon(
+              //         size: 20,
+              //         _obscureConfirm ? Icons.visibility_off : Icons.visibility,
+              //       ),
+              //       onPressed: () {
+              //         setState(() => _obscureConfirm = !_obscureConfirm);
+              //       },
+              //     ),
+              //   ),
+              //   validator: (value) {
+              //     if (value == null || value.isEmpty) {
+              //       return 'Confirm Password is required';
+              //     }
+              //     if (value != passwordController.text) {
+              //       return 'Passwords do not match';
+              //     }
+              //     if (value.length < 6) {
+              //       return 'Confirm Password must be at least 6 characters';
+              //     }
+              //     return null;
+              //   },
+              // ),
               const SizedBox(height: 20),
 
               ElevatedButton(
@@ -200,11 +199,12 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                                 .read(authProvider.notifier)
                                 .register(
                                   emailController.text,
-                                  passwordController.text,
-                                  confirmpasswordController.text,
-                                  usernameController.text,
+
+                                  // confirmpasswordController.text,
+                                  // usernameController.text,
                                   nameController.text,
-                                  phoneController.text,
+                                  passwordController.text,
+                                  // phoneController.text,
                                 );
                           }
                         },

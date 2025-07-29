@@ -2,12 +2,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_ecommerce/provider/auth_provider.dart';
 import 'package:riverpod_ecommerce/provider/cart_provider.dart';
 import 'package:riverpod_ecommerce/provider/category_provider.dart';
 import 'package:riverpod_ecommerce/provider/product_provider.dart';
 import 'package:riverpod_ecommerce/provider/user_provider.dart';
 
 import 'package:riverpod_ecommerce/utils/app_toast.dart';
+import 'package:riverpod_ecommerce/utils/capitaliaze.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -92,7 +94,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   ),
                                   SizedBox(width: 5),
                                   Text(
-                                    'Welcome ${user.firstname}',
+                                    'Welcome ${capitalizeFirstLetter(user.name)}',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 13,
@@ -225,6 +227,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                           url,
                                           fit: BoxFit.cover,
                                           width: double.infinity,
+                                          gaplessPlayback: true,
                                         ),
                                       ),
                                     )

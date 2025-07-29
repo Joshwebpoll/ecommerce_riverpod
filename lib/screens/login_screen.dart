@@ -32,38 +32,38 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final loginState = ref.watch(authProvider);
 
     ref.listen<AsyncValue<String>>(authProvider, (prev, next) {
-      if (prev != next) {
-        next.whenOrNull(
-          data: (message) {
-            if (message.isNotEmpty) {
-              AppToast.show(
-                context,
-                message.isNotEmpty ? "Login Successful" : "",
-                type: ToastTypes.success,
-                position: ToastPosition.bottom,
-                duration: Duration(seconds: 5),
-              );
-              // CompanyToast.show(context, message, type: ToastType.success);
-
-              Future.microtask(() {
-                if (!context.mounted) return;
-                ref.read(authProvider.notifier).reset();
-                Navigator.popAndPushNamed(context, '/home');
-              });
-            }
-          },
-
-          error: (e, _) {
+      print('$next,$prev');
+      next.whenOrNull(
+        data: (message) {
+          // ignore: unnecessary_null_comparison
+          if (message != null && prev?.valueOrNull == null) {
             AppToast.show(
               context,
-              e.toString(),
-              type: ToastTypes.error,
+              message.isNotEmpty ? "Login Successful" : "",
+              type: ToastTypes.success,
               position: ToastPosition.bottom,
               duration: Duration(seconds: 5),
             );
-          },
-        );
-      }
+            // CompanyToast.show(context, message, type: ToastType.success);
+
+            Future.microtask(() {
+              if (!context.mounted) return;
+              ref.read(authProvider.notifier).reset();
+              Navigator.popAndPushNamed(context, '/home');
+            });
+          }
+        },
+
+        error: (e, _) {
+          AppToast.show(
+            context,
+            e.toString(),
+            type: ToastTypes.error,
+            position: ToastPosition.bottom,
+            duration: Duration(seconds: 5),
+          );
+        },
+      );
     });
     return Scaffold(
       body: Padding(
@@ -71,7 +71,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         child: ListView(
           children: [
             const SizedBox(height: 40),
-            Image.asset('assets/images/login.jpg', height: 200),
+            Image.asset(
+              'assets/images/login.jpg',
+              height: 200,
+              gaplessPlayback: true,
+            ),
 
             // const Text(
             //   'Login',
