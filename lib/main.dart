@@ -17,6 +17,7 @@ import 'package:riverpod_ecommerce/screens/reset_password_screen.dart';
 import 'package:riverpod_ecommerce/screens/signup_screen.dart';
 import 'package:riverpod_ecommerce/services/auth_service.dart';
 import 'package:riverpod_ecommerce/screens/product_details.dart';
+import 'package:riverpod_ecommerce/services/user_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +30,7 @@ void main() async {
     ),
   );
   final authRes = AuthService();
+  final user = await UserService().checkUser();
 
   final isLoggedIn = await authRes.isLoggedIn();
   final isOnboarded = await authRes.isOnboarded();
@@ -38,7 +40,7 @@ void main() async {
     ProviderScope(
       child: MyApp(
         initialRoute:
-            isLoggedIn
+            user
                 ? '/home'
                 : isOnboarded
                 ? '/'

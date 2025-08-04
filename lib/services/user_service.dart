@@ -27,4 +27,23 @@ class UserService {
       throw (data['message']);
     }
   }
+
+  Future<bool> checkUser() async {
+    final token = await AuthService().getToken();
+
+    final res = await http.get(
+      Uri.parse('$baseUrl/auth/me'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer $token",
+      },
+    );
+    final data = jsonDecode(res.body);
+
+    if (res.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
